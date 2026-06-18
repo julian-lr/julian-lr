@@ -5,13 +5,40 @@ function WorkExperience() {
     <section className={styles.workExperience}>
       <h2>Work Experience</h2>
       <div className={styles.timeline}>
+        {/* Kopius */}
+        <div className={styles.company}>
+          <h3>Kopius</h3>
+          <span className={styles.dates}>May 2026 – Present</span>
+          <div className={styles.role}>
+            <h4>Senior Web & Marketing Automation Engineer</h4>
+            <div>
+              <p>At Kopius, I work as a Senior Web & Marketing Automation Engineer, supporting digital marketing and web operations for a major global financial markets organization. My role sits at the intersection of Salesforce Marketing Cloud, web content platforms, enterprise CMS workflows, and marketing automation, combining technical implementation with campaign operations, QA, and scalable digital delivery.</p>
+              <p>I work across Salesforce Marketing Cloud, DA.live, and Adobe Experience Manager, supporting the creation, maintenance, and optimization of marketing communications and web experiences. This includes working with campaign assets, content updates, platform-specific workflows, QA validation, and technical coordination to ensure that digital experiences are accurate, consistent, and aligned with business and compliance requirements.</p>
+              <p>In Salesforce Marketing Cloud, I contribute to marketing automation and campaign execution processes, supporting email production, testing, segmentation-related validation, and operational consistency. On the web side, I work with Adobe Experience Manager and DA.live to support enterprise-level content management, page updates, and digital experience delivery for a highly regulated, business-critical environment.</p>
+              <p>This role allows me to bring together my background in SFMC, email development, QA, marketing operations, and digital production, while expanding further into enterprise web platforms and modern content operations. It also strengthens my focus on building reliable, scalable processes that connect marketing strategy, technical execution, and operational excellence.</p>
+            </div>
+          </div>
+        </div>
+        {/* Freelance */}
+        <div className={styles.company}>
+          <h3>Freelance</h3>
+          <span className={styles.dates}>Nov 2025 – Apr 2026</span>
+          <div className={styles.role}>
+            <h4>Marketing Operations Support</h4>
+            <div>
+              <p>As a freelance Marketing Operations Support specialist, I provided support to United Parks & Resorts across Salesforce Marketing Cloud operations, campaign planning, technical execution, and process improvement. My role combined hands-on SFMC work with a broader marketing operations perspective, helping bridge the gap between campaign strategy, audience planning, production needs, and reliable execution.</p>
+              <p>I worked across email marketing operations, automation support, data extension management, QA validation, campaign setup, and segmentation-related processes, ensuring that marketing communications were structured, tested, and aligned with business requirements before deployment. I also contributed to planning discussions around campaign workflows, operational improvements, and scalable ways to support high-volume customer engagement across email and other owned channels.</p>
+              <p>This experience allowed me to apply my Salesforce Marketing Cloud background in a more strategic and operational context, supporting both the technical side of campaign execution and the planning needed to make marketing operations more consistent, efficient, and scalable.</p>
+            </div>
+          </div>
+        </div>
         {/* Accenture Song */}
         <div className={styles.company}>
           <h3>Accenture Song</h3>
-          <span className={styles.dates}>Jan 2022 – Present</span>
+          <span className={styles.dates}>Jan 2022 – Apr 2026</span>
           <div className={styles.role}>
             <h4>User Experience Arch Analyst</h4>
-            <span className={styles.dates}>Nov 2022 – Present</span>
+            <span className={styles.dates}>Nov 2022 – Apr 2026</span>
             <div>
               <p>At Accenture Song, I lead a four-person email development team for a major international bank, working primarily within Salesforce Marketing Cloud. My role combines hands-on SFMC execution, email development leadership, QA strategy, campaign governance, and marketing operations support, ensuring that high-volume communications are built, tested, documented, and delivered with consistency and accuracy.</p>
               <p>My main focus is on creating scalable, accessible, and reliable email campaigns, translating complex designs into production-ready HTML while guiding the team through technical decisions, reusable components, rendering challenges, and platform best practices. I also helped improve delivery efficiency by contributing to standardized workflows, reusable email structures, and clearer development processes that reduced friction between creative, QA, and deployment teams.</p>
