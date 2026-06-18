@@ -56,7 +56,7 @@ const projects: Project[] = [
 function Projects() {
   return (
     <section className={styles.projects}>
-      <h2>Projects</h2>
+      <h2>Dev Projects</h2>
       <div className={styles.projectGrid}>
         {projects.map((project, idx) => (
           <a
