@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import styles from './Navbar.module.scss'
+import useTheme from '../../../hooks/useTheme'
 
 interface NavbarProps {
   current: number;
@@ -64,19 +65,8 @@ function focusSectionHeading(sectionId: string) {
 function Navbar({ current, setCurrent, sections }: NavbarProps) {
   // Track if the mobile menu is open
   const [open, setOpen] = useState(false)
-  // Track the current theme (light/dark)
-  const [theme, setTheme] = useState<'light' | 'dark'>(() => {
-    // On first render, check the current data-theme or default to light
-    if (typeof window !== 'undefined') {
-      return (document.documentElement.getAttribute('data-theme') as 'dark' | 'light') || 'light';
-    }
-    return 'light';
-  });
-
-  // Update the data-theme attribute on the <html> element when theme changes
-  useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme)
-  }, [theme])
+  // Use centralized theme hook (reads system, persists preference)
+  const { theme, setTheme } = useTheme()
 
   // Handle link click: set current section, close mobile menu
   const handleClick = (idx: number) => {
@@ -92,7 +82,7 @@ function Navbar({ current, setCurrent, sections }: NavbarProps) {
 
   // Toggle between light and dark mode
   const toggleTheme = () => {
-    setTheme((prev) => (prev === 'light' ? 'dark' : 'light'))
+    setTheme(theme === 'light' ? 'dark' : 'light')
   }
 
   return (
