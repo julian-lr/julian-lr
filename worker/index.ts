@@ -1,5 +1,5 @@
 interface Env {
-  EMAIL: SendEmail
+  RESEND_API_KEY: string
 }
 
 const CORS_HEADERS = {
@@ -18,7 +18,7 @@ function jsonResponse(body: Record<string, unknown>, status: number) {
   })
 }
 
-// Handles POST /api/contact submissions using Cloudflare's native Email Service
+// Handles POST /api/contact submissions using the Resend API
 async function handleContact(request: Request, env: Env): Promise<Response> {
   try {
     const formData = await request.formData()
@@ -39,6 +39,15 @@ async function handleContact(request: Request, env: Env): Promise<Response> {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     if (!emailRegex.test(email)) {
       return jsonResponse({ success: false, message: 'Please enter a valid email address.' }, 400)
+    }
+
+    const resendApiKey = env.RESEND_API_KEY
+    if (!resendApiKey) {
+      console.error('RESEND_API_KEY environment variable not set')
+      return jsonResponse(
+        { success: false, message: 'Server configuration error. Please try again later.' },
+        500
+      )
     }
 
     const emailHtml = `
@@ -66,17 +75,25 @@ ${message}
 Sent from julianlr.com contact form
     `
 
-    try {
-      await env.EMAIL.send({
+    const resendResponse = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${resendApiKey}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
         from: 'noreply@julianlr.com',
-        to: 'hi@julianlr.com',
-        replyTo: email,
+        to: ['hi@julianlr.com'],
+        reply_to: email,
         subject: `Contact Form: ${subject}`,
         html: emailHtml,
         text: emailText,
-      })
-    } catch (error) {
-      console.error('Email Service error:', error)
+      }),
+    })
+
+    if (!resendResponse.ok) {
+      const errorData = await resendResponse.text()
+      console.error('Resend API error:', errorData)
       return jsonResponse(
         { success: false, message: 'Failed to send email. Please try again later.' },
         500
