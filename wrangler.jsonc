@@ -7,5 +7,14 @@
     // Any URL that doesn't match a static asset falls back to index.html,
     // since this is a single-page app (fullpage.js-style, no client router).
     "not_found_handling": "single-page-application"
-  }
+  },
+  "send_email": [
+    {
+      // Contact form notifications only ever go to one inbox, from one
+      // sender, so both are locked down at the binding level.
+      "name": "EMAIL",
+      "destination_address": "hi@julianlr.com",
+      "allowed_sender_addresses": ["noreply@julianlr.com"]
+    }
+  ]
 }
