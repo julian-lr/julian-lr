@@ -55,7 +55,7 @@ function validate(values: typeof initialState) {
   }
   
   // Phone validation (optional but if provided should be valid)
-  if (values.phone.trim() && !/^[\+]?[1-9][\d]{0,15}$/.test(values.phone.replace(/[\s\-\(\)]/g, ''))) {
+  if (values.phone.trim() && !/^[+]?[1-9][\d]{0,15}$/.test(values.phone.replace(/[\s\-()]/g, ''))) {
     errors.phone = 'Please enter a valid phone number.'
   }
   
@@ -121,9 +121,9 @@ function Contact() {
     <section className={styles.contact}>
       <h2>Contact</h2>
       <div className={styles.contactList}>
-        <a href="mailto:hey.julianlr@gmail.com" className={styles.link} target="_blank" rel="noopener noreferrer">
+        <a href="mailto:hi@julianlr.com" className={styles.link} target="_blank" rel="noopener noreferrer">
           <img src={EmailIcon} alt="E-mail" width={32} height={32} className={styles.icon} />
-          <span className={styles.linkText}>hey.julianlr@gmail.com</span>
+          <span className={styles.linkText}>hi@julianlr.com</span>
         </a>
         <a href="https://www.linkedin.com/in/julian-lr/" className={styles.link} target="_blank" rel="noopener noreferrer">
           <img src={LinkedinIcon} alt="LinkedIn" width={32} height={32} className={styles.icon} />
@@ -137,34 +137,34 @@ function Contact() {
       <form className={styles.form} onSubmit={handleSubmit} autoComplete="off" noValidate>
         <div className={styles.field}>
           <label htmlFor="name">Name*</label>
-          <input id="name" name="name" value={values.name} onChange={handleChange} required autoComplete="name" className={errors.name ? styles.error : ''} />
-          {errors.name && <div className={styles.errorMsg}>{errors.name}</div>}
+          <input id="name" name="name" value={values.name} onChange={handleChange} required autoComplete="name" aria-invalid={!!errors.name} aria-describedby={errors.name ? 'name-error' : undefined} className={errors.name ? styles.error : ''} />
+          {errors.name && <div id="name-error" className={styles.errorMsg} role="alert">{errors.name}</div>}
         </div>
         <div className={styles.field}>
           <label htmlFor="email">Email*</label>
-          <input id="email" name="email" value={values.email} onChange={handleChange} required autoComplete="email" className={errors.email ? styles.error : ''} />
-          {errors.email && <div className={styles.errorMsg}>{errors.email}</div>}
+          <input id="email" name="email" value={values.email} onChange={handleChange} required autoComplete="email" aria-invalid={!!errors.email} aria-describedby={errors.email ? 'email-error' : undefined} className={errors.email ? styles.error : ''} />
+          {errors.email && <div id="email-error" className={styles.errorMsg} role="alert">{errors.email}</div>}
         </div>
         <div className={styles.field}>
           <label htmlFor="phone">Phone</label>
-          <input id="phone" name="phone" value={values.phone} onChange={handleChange} autoComplete="tel" className={errors.phone ? styles.error : ''} />
-          {errors.phone && <div className={styles.errorMsg}>{errors.phone}</div>}
+          <input id="phone" name="phone" value={values.phone} onChange={handleChange} autoComplete="tel" aria-invalid={!!errors.phone} aria-describedby={errors.phone ? 'phone-error' : undefined} className={errors.phone ? styles.error : ''} />
+          {errors.phone && <div id="phone-error" className={styles.errorMsg} role="alert">{errors.phone}</div>}
         </div>
         <div className={styles.field}>
           <label htmlFor="subject">Subject*</label>
-          <input id="subject" name="subject" value={values.subject} onChange={handleChange} required className={errors.subject ? styles.error : ''} />
-          {errors.subject && <div className={styles.errorMsg}>{errors.subject}</div>}
+          <input id="subject" name="subject" value={values.subject} onChange={handleChange} required aria-invalid={!!errors.subject} aria-describedby={errors.subject ? 'subject-error' : undefined} className={errors.subject ? styles.error : ''} />
+          {errors.subject && <div id="subject-error" className={styles.errorMsg} role="alert">{errors.subject}</div>}
         </div>
         <div className={styles.field}>
           <label htmlFor="message">Message*</label>
-          <textarea id="message" name="message" value={values.message} onChange={handleChange} required rows={5} className={errors.message ? styles.error : ''} />
-          {errors.message && <div className={styles.errorMsg}>{errors.message}</div>}
+          <textarea id="message" name="message" value={values.message} onChange={handleChange} required rows={5} aria-invalid={!!errors.message} aria-describedby={errors.message ? 'message-error' : undefined} className={errors.message ? styles.error : ''} />
+          {errors.message && <div id="message-error" className={styles.errorMsg} role="alert">{errors.message}</div>}
         </div>
         <button type="submit" disabled={submitting} className={styles.submitBtn}>
           {submitting ? 'Sending...' : 'Submit'}
         </button>
-        {success && <div className={styles.successMsg}>{responseMessage}</div>}
-        {fail && <div className={styles.errorMsg}>{responseMessage}</div>}
+        {success && <div className={styles.successMsg} role="status" aria-live="polite">{responseMessage}</div>}
+        {fail && <div className={styles.errorMsg} role="alert" aria-live="assertive">{responseMessage}</div>}
       </form>
     </section>
   )

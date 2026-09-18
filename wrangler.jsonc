@@ -1,0 +1,11 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "julian-lr",
+  "compatibility_date": "2026-09-18",
+  "main": "./worker/index.ts",
+  "assets": {
+    // Any URL that doesn't match a static asset falls back to index.html,
+    // since this is a single-page app (fullpage.js-style, no client router).
+    "not_found_handling": "single-page-application"
+  }
+}
