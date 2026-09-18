@@ -19,14 +19,22 @@
   max-width: 600px;
   display: flex;
   flex-direction: column;
-  gap: 2.5rem;
+  gap: var(--space-lg);
   margin-top: 2rem;
 }
 
 .group {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: var(--space-xs);
+  border-left: 3px solid var(--color-border);
+  padding-left: var(--space-md);
+  transition: border-color var(--duration-fast) var(--ease-standard);
+}
+
+.group:hover,
+.group:focus-within {
+  border-left-color: var(--color-navbar-link-active);
 }
 
 .group strong {
@@ -44,7 +52,7 @@
 .group li {
   font-size: 1rem;
   margin-bottom: 0.2rem;
-  color: var(--text-primary);
+  color: var(--color-text);
 }
 
 .courseRow {
@@ -55,7 +63,7 @@
   width: 100%;
   font-size: 1rem;
   margin-bottom: 0.2rem;
-  color: var(--text-primary);
+  color: var(--color-text);
 }
 
 .courseName {
@@ -66,7 +74,7 @@
 }
 
 .date {
-  color: var(--text-tertiary);
+  color: var(--color-text-tertiary);
   font-size: 0.95em;
   white-space: nowrap;
   margin-left: 1em;

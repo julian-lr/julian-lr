@@ -97,36 +97,37 @@ input,
 textarea {
   font-size: 1rem;
   padding: 0.6em 0.9em;
-  border: 1.5px solid var(--color-navbar-divider);
-  border-radius: 0.5em;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-sm);
   background: var(--color-bg);
   color: var(--color-text);
-  transition: border 0.2s;
+  transition: border-color var(--duration-fast) var(--ease-standard), box-shadow var(--duration-fast) var(--ease-standard);
 }
 
 input::placeholder,
 textarea::placeholder {
-  color: var(--color-navbar-link);
+  color: var(--color-text-tertiary);
 }
 
 input:focus,
 textarea:focus {
   outline: none;
   border-color: var(--color-navbar-link-active);
+  box-shadow: var(--focus-ring);
 }
 
 .error {
-  border-color: #e74c3c !important;
+  border-color: var(--color-danger) !important;
 }
 
 .errorMsg {
-  color: #e74c3c;
+  color: var(--color-danger);
   font-size: 0.97em;
   margin-top: 0.1em;
 }
 
 .successMsg {
-  color: #27ae60;
+  color: var(--color-success);
   font-size: 1em;
   margin-top: 0.7em;
   text-align: center;
@@ -138,11 +139,11 @@ textarea:focus {
   font-size: 1.1rem;
   font-weight: 600;
   border: 2px solid var(--color-link);
-  border-radius: 0.5em;
+  border-radius: var(--radius-sm);
   background: var(--color-link);
-  color: var(--color-bg);
+  color: #fff;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all var(--duration-fast) var(--ease-standard);
 }
 
 .submitBtn:hover {
@@ -151,9 +152,9 @@ textarea:focus {
 }
 
 .submitBtn:disabled {
-  background: #aaa;
-  border-color: #aaa;
-  color: #666;
+  background: var(--color-text-tertiary);
+  border-color: var(--color-text-tertiary);
+  color: var(--color-bg);
   cursor: not-allowed;
 }
 

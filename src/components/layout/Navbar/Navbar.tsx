@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useState } from 'react'
 import styles from './Navbar.module.scss'
 import useTheme from '../../../hooks/useTheme'
 
@@ -86,7 +86,7 @@ function Navbar({ current, setCurrent, sections }: NavbarProps) {
   }
 
   return (
-    <nav className={styles.navbar}>
+    <nav className={styles.navbar} aria-label="Primary">
       {/* Navbar content: logo, burger, desktop links, theme toggle */}
       <div className={styles.navbarContent}>
         <span className={styles.logo}>JLR</span>
@@ -106,20 +106,21 @@ function Navbar({ current, setCurrent, sections }: NavbarProps) {
           {sections.map((link, idx) => (
             <>
               {/* Nav link */}
-              <span
+              <button
                 key={link.id}
+                type="button"
                 className={
                   styles.link +
                   (current === idx ? ' ' + styles.active : '')
                 }
+                aria-current={current === idx ? 'true' : undefined}
                 onClick={() => handleClick(idx)}
-                onMouseDown={e => e.preventDefault()}
               >
                 <span className={styles.linkText}>{link.name}</span>
-              </span>
+              </button>
               {/* Divider between links, not after last */}
               {idx < sections.length - 1 && (
-                <span key={'divider-' + idx} className={styles.divider}>|</span>
+                <span key={'divider-' + idx} className={styles.divider} aria-hidden="true">|</span>
               )}
             </>
           ))}
@@ -137,17 +138,18 @@ function Navbar({ current, setCurrent, sections }: NavbarProps) {
       {/* Mobile menu: links stacked, theme toggle centered below */}
       <div className={open ? styles.linksMobileOpen : styles.linksMobile}>
         {sections.map((link, idx) => (
-          <span
+          <button
             key={link.id}
+            type="button"
             className={
               styles.link +
               (current === idx ? ' ' + styles.active : '')
             }
+            aria-current={current === idx ? 'true' : undefined}
             onClick={() => handleClick(idx)}
-            onMouseDown={e => e.preventDefault()}
           >
             <span className={styles.linkText}>{link.name}</span>
-          </span>
+          </button>
         ))}
         {/* Theme toggle centered in mobile menu */}
         <button

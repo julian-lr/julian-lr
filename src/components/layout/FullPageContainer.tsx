@@ -24,6 +24,12 @@ function clamp(val: number, min: number, max: number) {
   return Math.max(min, Math.min(max, val));
 }
 
+// Matches the CSS transition duration, shortened when the user prefers reduced motion
+function getTransitionLockMs() {
+  if (typeof window === 'undefined' || !window.matchMedia) return 700;
+  return window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 50 : 700;
+}
+
 interface FullPageContainerProps {
   current: number;
   setCurrent: (idx: number) => void;
@@ -33,7 +39,7 @@ interface FullPageContainerProps {
 const FullPageContainer: React.FC<FullPageContainerProps> = ({ current, setCurrent, sections }) => {
   const isMobileOrTablet = useIsMobileOrTablet();
   const isTransitioning = useRef(false);
-  const sectionRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const sectionRefs = useRef<(HTMLElement | null)[]>([]);
 
   // Only enable navigation handlers on desktop
   useEffect(() => {
@@ -132,7 +138,7 @@ const FullPageContainer: React.FC<FullPageContainerProps> = ({ current, setCurre
     if (isMobileOrTablet) return;
     const timeout = setTimeout(() => {
       isTransitioning.current = false;
-    }, 700); // matches CSS transition duration
+    }, getTransitionLockMs());
     return () => clearTimeout(timeout);
   }, [current, isMobileOrTablet]);
 
@@ -148,34 +154,36 @@ const FullPageContainer: React.FC<FullPageContainerProps> = ({ current, setCurre
   if (isMobileOrTablet) {
     // Stacked layout for mobile: all sections, normal scroll
     return (
-      <div>
+      <main id="main-content">
         {sections.map(section => (
-          <section key={section.id} id={section.id} className={styles.section}>
+          <section key={section.id} id={section.id} className={styles.section} aria-label={section.name}>
             {sectionComponents[section.id]}
           </section>
         ))}
-      </div>
+      </main>
     );
   }
 
   return (
-    <div className={styles.fullPageContainer}>
+    <main id="main-content" className={styles.fullPageContainer}>
       <div
         className={styles.fullPageWrapper}
         style={{ transform: `translateY(-${current * 100}vh)` }}
       >
         {sections.map((section, idx) => (
-          <div
+          <section
             className={styles.section}
             key={section.id}
             id={section.id}
+            aria-label={section.name}
+            inert={idx !== current}
             ref={el => { sectionRefs.current[idx] = el; }}
           >
             {sectionComponents[section.id]}
-          </div>
+          </section>
         ))}
       </div>
-    </div>
+    </main>
   );
 };
 

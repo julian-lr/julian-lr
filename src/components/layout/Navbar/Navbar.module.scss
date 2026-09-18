@@ -114,6 +114,8 @@
 
 // Nav link styling
 .link {
+  appearance: none;
+  border: none;
   cursor: pointer;
   color: var(--color-navbar-link);
   font-family: inherit;
@@ -122,6 +124,7 @@
   background: transparent;
   font-size: 1.05rem;
   outline: none;
+  text-align: center;
   transition: color 0.2s, background 0.2s;
 }
 

@@ -17,9 +17,8 @@ function Home() {
             Julián <span className={styles.highlight}>Laurito Riscica</span>
           </h1>
           <div className={styles.roles}>
-            <span>Martech Specialist</span>
-            <span> • </span>
-            <span>Frontend Dev</span>
+            <span className={styles.roleChip}>Martech Specialist</span>
+            <span className={styles.roleChip}>Frontend Dev</span>
           </div>
         </div>
       </div>

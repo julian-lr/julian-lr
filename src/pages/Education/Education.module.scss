@@ -19,19 +19,22 @@
   max-width: 600px;
   display: flex;
   flex-direction: column;
-  gap: 2.5rem;
+  gap: var(--space-lg);
   margin-top: 2rem;
 }
 
 .entry {
-  /* Remove card styling */
-  background: none;
-  border-radius: 0;
-  box-shadow: none;
-  padding: 0 0 1.5rem 0;
+  border-left: 3px solid var(--color-border);
+  padding: 0 0 0.2rem var(--space-md);
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: var(--space-2xs);
+  transition: border-color var(--duration-fast) var(--ease-standard);
+}
+
+.entry:hover,
+.entry:focus-within {
+  border-left-color: var(--color-navbar-link-active);
 }
 
 .entry h3 {
@@ -42,12 +45,12 @@
 
 .degree {
   font-size: 1rem;
-  color: var(--text-secondary);
+  color: var(--color-text-secondary);
 }
 
 .dates {
   font-size: 0.95rem;
-  color: var(--text-tertiary);
+  color: var(--color-text-tertiary);
 }
 
 @media (max-width: 600px) {

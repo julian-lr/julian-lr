@@ -25,17 +25,20 @@
 .projectCard {
   display: block;
   height: 300px;
-  border-radius: 1rem;
+  border-radius: var(--radius-lg);
   overflow: hidden;
   text-decoration: none;
-  color: var(--text-primary);
-  transition: transform 0.3s ease;
+  color: var(--color-text);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--duration-base) var(--ease-standard), box-shadow var(--duration-base) var(--ease-standard);
   cursor: pointer;
   position: relative;
 }
 
-.projectCard:hover {
+.projectCard:hover,
+.projectCard:focus-visible {
   transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
 }
 
 .cardBackground {
@@ -142,9 +145,9 @@
 }
 
 .status.completed {
-  background: rgba(39, 174, 96, 0.8);
+  background: color-mix(in srgb, var(--color-success) 80%, transparent);
   color: white;
-  border: 1px solid rgba(39, 174, 96, 0.9);
+  border: 1px solid color-mix(in srgb, var(--color-success) 90%, transparent);
 }
 
 .status.inprogress {
@@ -160,9 +163,9 @@
 }
 
 .status.deprecated {
-  background: rgba(231, 76, 60, 0.8);
+  background: color-mix(in srgb, var(--color-danger) 80%, transparent);
   color: white;
-  border: 1px solid rgba(231, 76, 60, 0.9);
+  border: 1px solid color-mix(in srgb, var(--color-danger) 90%, transparent);
 }
 
 /* Hover effects */

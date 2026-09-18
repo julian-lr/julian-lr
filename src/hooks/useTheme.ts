@@ -22,7 +22,7 @@ export default function useTheme() {
     document.documentElement.setAttribute('data-theme', theme)
     try {
       localStorage.setItem('theme', theme)
-    } catch (e) {
+    } catch {
       // ignore storage errors
     }
   }, [theme])
